@@ -27,7 +27,9 @@ module.exports = (req, res, next) => {
     // Run SearchingSortingPagination engine for Model:
     res.getModelList = async function (Model, populate = null) {
 
-        return await Model.find(search).sort(sort).skip(skip).limit(limit).populate(populate)
+        // return await Model.find(search).sort(sort).skip(skip).limit(limit).populate(populate)
+        return await Model.find(search).sort(sort).skip(skip).limit(limit)
+
     }
 
     // Details:
