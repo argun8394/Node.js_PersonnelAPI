@@ -21,10 +21,10 @@ module.exports = {
 
     create: async (req, res) => {
 
-        // isLead Control:
+        // isLead Control:  When a new Lead is created the other lead role is removed
         const isLead = req.body?.isLead || false
         if (isLead) {
-            const xyz = await Personnel.updateMany({ departmentId: req.body.departmentId, isLead: true }, { isLead: false })
+            const checkLead = await Personnel.updateMany({ departmentId: req.body.departmentId, isLead: true }, { isLead: false })
         }
 
         const data = await Personnel.create(req.body)
@@ -49,10 +49,10 @@ module.exports = {
 
     update: async (req, res) => {
 
-        // isLead Control:
+        // isLead Control: When a new Lead is created the other lead role is removed
         const isLead = req.body?.isLead || false
         if (isLead) {
-            const { departmentId } = await Personnel.findOne({ _id: req.params.id }, { departmentId: 1 })
+            const { departmentId } = await Personnel.findOne({ _id: req.params.id }, { departmentId: 1 }) //In case departmentId is not sent
             await Personnel.updateMany({ departmentId, isLead: true }, { isLead: false })
         }
 
