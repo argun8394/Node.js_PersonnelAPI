@@ -75,6 +75,7 @@ module.exports = {
         })
     },
 
+    // LOGIN & LOGOUT
     login: async (req, res) => {
 
         const { username, password } = req.body
@@ -107,5 +108,14 @@ module.exports = {
             res.errorStatusCode = 401
             throw new Error('Please entry username and password.')
         }
+    },
+
+    logout: async (req, res) => {
+        // Set session to null:
+        req.session = null
+        res.status(200).send({
+            error: false,
+            message: 'Logout: Sessions Deleted.'
+        })
     },
 }
